@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <style type="text/css">
+    
+        .bgStyle{
+           background-color: #313231;
+        }
+        .butt {
+           font-weight: 600;
+           border-radius: 10px;
+           border: 1px outset black;
+           background-color: black;
+           font-size: 32px; 
+           color: #0A6010;
+           height:75px;
+           width:75px;
+           cursor:pointer;
+        }
+        .butt:hover {
+           background-color: gray;
+           color:green;
+        }
+        #reStartButt {
+           background-color: #313231;
+           color:green;
+           font-size: 32px; 
+           border: 0px;
+           width: 100px;
+           height: 75px;  
+        }
+        #reSartButt:hover {
+           background-color: black;
+           color:green;
+        }
+        #rcorners {
+          width: 400px;
+		  margin: 0 auto;
+          border-radius: 25px;
+          border: 1px solid white;
+          padding: 10px; 
+          height: 320px;
+        }
+        .sectionFormat{
+          width: 150px;
+          margin: 10px;
+          text-align: center;
+        }
+        .mainSectionFormat {
+            width:100%;
+            height: auto;
+            vertical-align: middle;
+        }
+        .time {
+            color: white; 
+            font-size: 24px;
+        }
+        #overlay {
+          position: fixed;
+          width: 400px;
+          height: 320px;
+          margin: 0 auto;
+          z-index: 2;
+          cursor: pointer;
+          color: white;
+          text-align: center;
+          font-size: 100px;
+          font-family: sans-serif;
+          padding-top: 100px;
+        }
+        #overlayLast {
+          position: fixed;
+          width: 400px;
+          height: 320px;
+          margin: 0 auto;
+          z-index: 4;
+          cursor: pointer;
+          color: white;
+          text-align: center;
+          font-size: 50px;
+          font-family: sans-serif;
+          padding: 10px;
+        }
+        
+        .marquee1 {
+            width: 750px;
+            margin: 0 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .marquee1 td {
+            display: inline-block;
+            animation: marquee1 3s linear infinite;
+        }
+
+        .marquee1 td:hover {
+            animation-play-state: running;
+        }
+        
+        @keyframes marquee1 {
+            0%   { transform: translateX(-5%); }
+            100% { transform: translateX(15%); }
+        }
+        
+        .marquee2 {
+            width: 100%;
+            margin: 0 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+            animation-fill-mode: both;
+        }
+
+        .marquee2 td {
+            display: inline-block;
+            animation: marquee2 3s linear infinite;
+        }
+
+        .marquee2 td:hover {
+            animation-play-state: running;
+        }
+        
+        @keyframes marquee2 {
+            0%   { transform: translateX(5%); }
+            100% { transform: translateX(-15%); }
+        }
+
+    </style>
+    </head>
+<body class="bgStyle" onload="setButtonElements()">
+    
+<p class="sectionFormat" style="color: white; font-size: 24px; float: right;">BEST TIME<br><span id="bestTime">0.000</span></p>
+<p class="sectionFormat" style="color: white; font-size: 24px; float: right;">TIME<br><span id="display-area">0.000</span></p>
+<br>
+
+ <p class="mainSectionFormat" style="color: green; font-size: 32px;">Click <b>the numbers</b> as<br> quickly as you can!
+    <span style="float:right;">New Game</span>
+</p>
+    
+<div id="rcorners" align="center">
+    <div id="overlay"><p></p></div>
+    <div id="overlayLast">Your Time is<br><span id="yourScore"></span><br><button id="reStartButt" onClick="setButtonElements()">Restart</button></div>
+    <table align="center" id="myTable">
+    
+    <tr class="marquee1">
+    <td><button id="1" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="1"></button></td>
+    <td><button id="2" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="2"></button></td>
+    <td><button id="3" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="3"></button></td>
+    <td><button id="4" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="4"></button></td>
+    <td><button id="5" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="5"></button></td>
+    </tr>
+    <tr class="marquee2">
+    <td><button id="6" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="6"></button></td>
+    <td><button id="7" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="7"></button></td>
+    <td><button id="8" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="8"></button></td>
+    <td><button id="9" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="9"></button></td>
+    <td><button id="10" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="10"></button></td>
+    </tr>
+    <tr class="marquee1">
+    <td><button id="11" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="11"></button></td>
+    <td><button id="12" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="12"></button></td>
+    <td><button id="13" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="13"></button></td>
+    <td><button id="14" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="14"></button></td>
+    <td><button id="15" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="15"></button></td>
+    </tr>
+    <tr class="marquee2">
+    <td><button id="16" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="16"></button></td>
+    <td><button id="17" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="17"></button></td>
+    <td><button id="18" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="18"></button></td>
+    <td><button id="19" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="19"></button></td>
+    <td><button id="20" class="butt" onClick="checkClick(this.id); playPauseAudio();" value="20"></button></td>
+    </tr>
+  
+    </table> 
+</div>
+
+     
+<! –– Backend Scripts ––>
+<script type="text/javascript">
+    var count = 1;
+    var checkCount = 1;
+    var array1 = [];
+    var array2 = [];
+    
+    function setArrayElements (){
+        array1 = [];
+        array2 = [];
+        
+        if(count==1){
+            for (var i=1; i <= 20; i++) {
+                array1.push(i);
+            }
+            for (var i=21; i <= 40; i++) {
+                array2.push(i);
+            }
+        }
+    }
+    
+    function startTimer(duration, display) {
+        var timer = duration, seconds;
+        var refreshInterval = setInterval(function () {
+            seconds = parseInt(timer % 60, 10);
+            display.textContent = seconds;
+            if (--timer < 0) {
+                {document.getElementById("myTable").style.display="block";}
+                {document.getElementById("overlay").style.display="none";}
+                start();
+                clearInterval(refreshInterval);
+            }
+        }, 1000);
+    }
+
+    function startTimerFunction() {
+        var threeSeconds = 3,
+        display = document.querySelector('#overlay');
+        startTimer(threeSeconds, display);
+    };
+    
+    function setButtonElements(){
+        checkCount = 1;
+        document.getElementById("overlay").style.display="block";
+        document.getElementById("display-area").innerHTML = "0.000";
+        document.getElementById("overlayLast").style.display="none";
+        if(localStorage.getItem("highScore") != null){
+            document.getElementById("bestTime").innerHTML = localStorage.getItem("highScore");
+        }
+        {document.getElementById("myTable").style.display="none";}
+        startTimerFunction();
+        if(count == 1){
+            setArrayElements ();
+            for (var i=1; i <= 20; i++) {
+                var randomElement1 = array1[Math.floor(Math.random() * array1.length)];
+                document.getElementById(i).style.backgroundColor = increase_brightness("#000000",(23.75-(randomElement1*0.595)));
+                document.getElementById(i).innerHTML=randomElement1;
+                removeArrayElement(array1,randomElement1);
+            }
+        }
+    }
+    
+    function checkClick(clicked_id){
+       if(checkCount>20){
+           if(document.getElementById(clicked_id).innerHTML==checkCount){
+               document.getElementById(clicked_id).innerHTML="";
+               if(checkCount<40){
+                    checkCount++;
+               }else{
+                   stop();
+                   {document.getElementById("overlayLast").style.display="block";}
+                   document.getElementById("yourScore").innerHTML = document.getElementById("display-area").innerHTML;
+                   setHighScore(document.getElementById("display-area").innerHTML);
+                   {document.getElementById("myTable").style.display="none";}
+               }
+           }
+       }else if(document.getElementById(clicked_id).innerHTML==checkCount){
+           var randomElement2 = array2[Math.floor(Math.random() * array2.length)];
+           document.getElementById(clicked_id).style.backgroundColor = increase_brightness("#000000",(23.75-(randomElement2*0.595)));
+           document.getElementById(clicked_id).innerHTML=randomElement2;
+           removeArrayElement(array2,randomElement2);
+           checkCount++;
+       }
+    }
+    
+    function removeArrayElement(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
+    }
+    
+    
+    //Changing the color density
+    
+    function increase_brightness(hex, percent){
+    // strip the leading # if it's there
+    hex = hex.replace(/^\s*#|\s*$/g, '');
+
+    // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
+    if(hex.length == 3){
+        hex = hex.replace(/(.)/g, '$1$1');
+    }
+
+    var r = parseInt(hex.substr(0, 2), 16),
+        g = parseInt(hex.substr(2, 2), 16),
+        b = parseInt(hex.substr(4, 2), 16);
+
+    return '#' +
+       ((0|(1<<8) + r + (256 - r) * percent / 100).toString(16)).substr(1) +
+       ((0|(1<<8) + g + (256 - g) * percent / 100).toString(16)).substr(1) +
+       ((0|(1<<8) + b + (256 - b) * percent / 100).toString(16)).substr(1);
+}
+    
+    //Storing the Best Time.........
+    
+    function setHighScore(score){
+        if (typeof(Storage) !== "undefined") {
+            if(localStorage.getItem("highScore")=== null){
+                localStorage.setItem("highScore",score);
+            }else if(score < localStorage.getItem("highScore")){
+              localStorage.setItem("highScore",score);
+              document.getElementById("bestTime").innerHTML = score;
+            }
+        } else {
+          alert("Sorry, your browser does not support Web Storage...");
+        }
+    }
+    
+    //PlayAudio
+    
+    function playPauseAudio(){
+        var gameSound = new Audio();
+        gameSound.src = "beep.mp3";
+        gameSound.play();
+    }
+    
+    //Timer.........
+    
+     var timeBegan = null
+        , timeStopped = null
+        , stoppedDuration = 0
+        , started = null;
+
+    function start() {
+        if (timeBegan === null) {
+            timeBegan = new Date();
+        }
+
+        if (timeStopped !== null) {
+            stoppedDuration += (new Date() - timeStopped);
+        }
+        console.log(stoppedDuration);
+
+        started = setInterval(clockRunning, 10);	
+    }
+
+    function stop() {
+        timeStopped = new Date();
+        clearInterval(started);
+    }
+
+    function reset() {
+        clearInterval(started);
+        stoppedDuration = 0;
+        timeBegan = null;
+        timeStopped = null;
+        document.getElementById("display-area").innerHTML = "00:00.000";
+    }
+
+    function clockRunning(){
+        var currentTime = new Date()
+            , timeElapsed = new Date(currentTime - timeBegan - stoppedDuration)
+            , min = timeElapsed.getUTCMinutes()
+            , sec = timeElapsed.getUTCSeconds()
+            , ms = timeElapsed.getUTCMilliseconds();
+
+        document.getElementById("display-area").innerHTML = 
+            (min > 9 ? min : "0" + min) + ":" + 
+            (sec > 9 ? sec : "0" + sec) + "." + 
+            (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+    };
+</script>
+</body>
+</html>
