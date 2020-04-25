@@ -130,8 +130,8 @@
     </style>
     </head>
 <body class="bgStyle" onload="setButtonElements()">
-    
-<p class="sectionFormat" style="color: white; font-size: 24px; float: right;">BEST TIME<br><span id="bestTime">0.000</span></p>
+
+<p class="sectionFormat" style="color: white; font-size: 24px; float: right;" onclick="getBestTimes();">BEST TIME<br><span id="bestTime">0.000</span></p>
 <p class="sectionFormat" style="color: white; font-size: 24px; float: right;">TIME<br><span id="display-area">0.000</span></p>
 <br>
 
@@ -175,6 +175,7 @@
   
     </table> 
 </div>
+   <br> <p style="color: white; font-size: 24px; text-align: center;">NOTE<br>Click over "BEST TIME" on the top right to see your previous results.</p>
 
      
 <! –– Backend Scripts ––>
@@ -299,15 +300,92 @@
     
     function setHighScore(score){
         if (typeof(Storage) !== "undefined") {
-            if(localStorage.getItem("highScore")=== null){
+            if(localStorage.getItem("highScore1")=== null){
+                localStorage.setItem("highScore1",score);
                 localStorage.setItem("highScore",score);
-            }else if(score < localStorage.getItem("highScore")){
-              localStorage.setItem("highScore",score);
-              document.getElementById("bestTime").innerHTML = score;
+                document.getElementById("bestTime").innerHTML = score;
+            } else if(localStorage.getItem("highScore2")=== null){
+                localStorage.setItem("highScore2",score);
+                for(var i =1; i<=2; i++){
+                    var tempHS = "highScore"+i;
+                    if(score<localStorage.getItem(tempHS)){
+                        document.getElementById("bestTime").innerHTML = score;
+                        localStorage.setItem("highScore",score);
+                    }else{
+                        document.getElementById("bestTime").innerHTML = localStorage.getItem(tempHS);
+                        localStorage.setItem("highScore",localStorage.getItem(tempHS));
+                    }
+                }
+            } else if(localStorage.getItem("highScore3")=== null){
+                localStorage.setItem("highScore3",score);
+                for(var i =1; i<=3; i++){
+                    var tempHS = "highScore"+i;
+                    if(score<localStorage.getItem(tempHS)){
+                        document.getElementById("bestTime").innerHTML = score;
+                        localStorage.setItem("highScore",score);
+                    }else{
+                        document.getElementById("bestTime").innerHTML = localStorage.getItem(tempHS);
+                        localStorage.setItem("highScore",localStorage.getItem(tempHS));
+                    }
+                }
+            } else if(localStorage.getItem("highScore4")=== null){
+                localStorage.setItem("highScore4",score);
+                for(var i =1; i<=4; i++){
+                    var tempHS = "highScore"+i;
+                    if(score<localStorage.getItem(tempHS)){
+                        document.getElementById("bestTime").innerHTML = score;
+                        localStorage.setItem("highScore",score);
+                    }else{
+                        document.getElementById("bestTime").innerHTML = localStorage.getItem(tempHS);
+                        localStorage.setItem("highScore",localStorage.getItem(tempHS));
+                    }
+                }
+            } else if(localStorage.getItem("highScore5")=== null){
+                localStorage.setItem("highScore5",score);
+                for(var i =1; i<=5; i++){
+                    var tempHS = "highScore"+i;
+                    if(score<localStorage.getItem(tempHS)){
+                        document.getElementById("bestTime").innerHTML = score;
+                        localStorage.setItem("highScore",score);
+                    }else{
+                        document.getElementById("bestTime").innerHTML = localStorage.getItem(tempHS);
+                        localStorage.setItem("highScore",localStorage.getItem(tempHS));
+                    }
+                }
+            }else{ // if(score < localStorage.getItem("highScore"))
+                for(var i=1; i<=5; i++){
+                    var tempHS = "highScore"+i;
+                    if(score<localStorage[tempHS]){
+                        localStorage[tempHS] = score;
+                        localStorage.setItem("highScore",score);
+                    }
+                }
+                var HIGH_SCORE = localStorage["highScore1"];
+                for(var i=2; i<=5; i++){
+                    var tempHS = "highScore"+i;
+                    if(localStorage[tempHS]<HIGH_SCORE){
+                        HIGH_SCORE = localStorage[tempHS];
+                        localStorage.setItem("highScore",HIGH_SCORE);
+                    }
+                }
+              document.getElementById("bestTime").innerHTML = HIGH_SCORE;
             }
         } else {
           alert("Sorry, your browser does not support Web Storage...");
         }
+    }
+    
+    function getBestTimes(){
+        var bestFiveTimes = "";
+        for(var i=1; i<=5; i++){
+             var tempHS = "highScore"+i;
+            if(localStorage[tempHS] != null){
+               bestFiveTimes = bestFiveTimes + localStorage[tempHS] + "\n";
+            }else{
+               bestFiveTimes = bestFiveTimes + "You are yet to play round "+i+ "\n";
+            }             
+        }
+        alert(bestFiveTimes);
     }
     
     //PlayAudio
